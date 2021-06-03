@@ -1554,9 +1554,18 @@ class Cerebro(with_metaclass(MetaParams, object)):
                 if onlyresample or noresample:
                     dt0 = min((d for d in dts if d is not None))
                 else:
-                    dt0 = min((d for i, d in enumerate(dts)
-                               if d is not None and i not in rsonly))
+                    zd = []
+                    for i, d in enumerate(dts):
+                        if d is not None and i not in rsonly:
+                            zd.append(d)
+                    if len(zd) > 0:
+                        dt0 = min(zd)
+                    else:
+                        dt0 = None
+                        # print("ValueError: min() arg is an empty sequence:", dts, zd, rsonly, dt0, flush=True)
 
+                if dt0 is None:
+                    continue
                 dmaster = datas[dts.index(dt0)]  # and timemaster
                 self._dtmaster = dmaster.num2date(dt0)
                 self._udtmaster = num2date(dt0)
