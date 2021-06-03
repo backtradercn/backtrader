@@ -137,7 +137,12 @@ class Returns(TimeFrameAnalyzerBase):
         self.rets['rtot'] = rtot
 
         # Average return
-        self.rets['ravg'] = ravg = rtot / self._tcount
+        ravg = 0
+        if self._tcount == 0:
+            self.rets['ravg'] = 0
+        else:
+            ravg = rtot / self._tcount
+            self.rets['ravg'] = ravg
 
         # Annualized normalized return
         tann = self.p.tann or self._TANN.get(self.timeframe, None)
