@@ -160,10 +160,6 @@ class LineBuffer(LineSingle):
         return len(self.array) - self.extension
 
     def __getitem__(self, ago):
-        if self.idx + ago >= len(self.array):
-            import numpy as np
-            print("IndexError: array index out of range", self.idx, ago, len(self.array))
-            return np.nan
         return self.array[self.idx + ago]
 
     def get(self, ago=0, size=1):
@@ -223,11 +219,7 @@ class LineBuffer(LineSingle):
             the slice
             value (variable): value to be set
         '''
-        try:
-            self.array[self.idx + ago] = value
-        except Exception as e:
-            print(self.idx, ago, e)
-            # raise e
+        self.array[self.idx + ago] = value
         for binding in self.bindings:
             binding[ago] = value
 
