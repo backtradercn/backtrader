@@ -168,3 +168,9 @@ X.Y.Z.I
   - Z: Revision version number. To be changed for documentation updates, small
     changes, small bug fixes
   - I: Number of Indicators already built into the platform
+  
+本版本修复了很多潜在defect,请使用本地安装方式安装:
+git clone https://github.com/backtradercn/backtrader
+cd backtrader
+git checkout backtradercn
+python setup.py install
