@@ -217,7 +217,9 @@ class Lines(object):
         '''
         Proxy line operation
         '''
-        return len(self.lines[0])
+        # https://community.backtrader.com/topic/1367/error-__len__-should-return-0-on-livefeed?loggedin=true
+        #fix :ValueError: __len__() should return >= 0
+        return max([len(self.lines[0]), 0])
 
     def size(self):
         return len(self.lines) - self._getlinesextra()
