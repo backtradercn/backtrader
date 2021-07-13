@@ -219,7 +219,12 @@ class Lines(object):
         '''
         # https://community.backtrader.com/topic/1367/error-__len__-should-return-0-on-livefeed?loggedin=true
         #fix :ValueError: __len__() should return >= 0
-        return max([len(self.lines[0]), 0])
+        lines_len = 0
+        try:
+            lines_len = len(self.lines[0])
+        except Exception as e:
+            print(e)
+        return max([lines_len, 0])
 
     def size(self):
         return len(self.lines) - self._getlinesextra()
