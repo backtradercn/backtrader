@@ -160,7 +160,12 @@ class LineBuffer(LineSingle):
         return len(self.array) - self.extension
 
     def __getitem__(self, ago):
-        return self.array[self.idx + ago]
+        try:
+            return self.array[self.idx + ago]
+        except IndexError as e:
+            print(e, "self.idx: %s, ago: %s" % (self.idx, ago))
+            import numpy as np
+            return np.nan
 
     def get(self, ago=0, size=1):
         ''' Returns a slice of the array relative to *ago*
