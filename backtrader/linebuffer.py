@@ -163,7 +163,7 @@ class LineBuffer(LineSingle):
         try:
             return self.array[self.idx + ago]
         except IndexError as e:
-            print(e, "self.idx: %s, ago: %s" % (self.idx, ago))
+            print(e, "self.idx: %s, ago: %s" % (self.idx, ago), " please try use: linesY.__getitem__(a)")
             import numpy as np
             return np.nan
 
