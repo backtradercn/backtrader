@@ -224,6 +224,8 @@ class Lines(object):
             lines_len = len(self.lines[0])
         except Exception as e:
             print(e)
+            import traceback
+            traceback.print_exc()
         return max([lines_len, 0])
 
     def size(self):
