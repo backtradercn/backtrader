@@ -776,7 +776,11 @@ class LinesOperation(LineActions):
         for i in range(start, end):
             # fix IndexError: array index out of range
             if i < len(srca) and i < len(srcb):
-                dst[i] = op(srca[i], srcb[i])
+                #dst[i] = op(srca[i], srcb[i])
+                try:
+                    dst[i] = op(srca[i], srcb[i])
+                except ZeroDivisionError:
+                    dst[i] = float(f'nan')
 
     def _once_time_op(self, start, end):
         # cache python dictionary lookups
