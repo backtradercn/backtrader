@@ -746,14 +746,30 @@ class LinesOperation(LineActions):
 
     def next(self):
         if self.bline:
-            self[0] = self.operation(self.a[0], self.b[0])
+            #self[0] = self.operation(self.a[0], self.b[0])
+            try:
+                self[0] = self.operation(self.a[0], self.b[0])
+            except ZeroDivisionError:
+                self[0] = float(f'nan')
         elif not self.r:
             if not self.btime:
-                self[0] = self.operation(self.a[0], self.b)
+                #self[0] = self.operation(self.a[0], self.b)
+                try:
+                    self[0] = self.operation(self.a[0], self.b)
+                except ZeroDivisionError:
+                    self[0] = float(f'nan')
             else:
-                self[0] = self.operation(self.a.time(), self.b)
+                #self[0] = self.operation(self.a.time(), self.b)
+                try:
+                    self[0] = self.operation(self.a.time(), self.b)
+                except ZeroDivisionError:
+                    self[0] = float(f'nan')
         else:
-            self[0] = self.operation(self.a, self.b[0])
+            #self[0] = self.operation(self.a, self.b[0])
+            try:
+                self[0] = self.operation(self.a, self.b[0])
+            except ZeroDivisionError:
+                self[0] = float(f'nan')
 
     def once(self, start, end):
         if self.bline:
